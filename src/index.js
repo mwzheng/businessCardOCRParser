@@ -41,7 +41,7 @@ function createNewContactBox(contactInfo) {
 // If field is not found, then give class name not found to make it red
 function makeContactPortion(field, id, input) {
     let className = input.includes('not found') ? 'notFound' : 'found';
-    return `<p><b><u>${field}</u>:</b> <span id=${id} class=${className}>${input}</span></p>`
+    return `<p><b><u>${field}</u>:</b> <span id=${id} class=${className}>${input}</span></p>`;
 }
 
 // Clears text field

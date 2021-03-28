@@ -49,16 +49,14 @@ class BusinessCardParser {
         }).join(' ');
     }
 
-    // String is a possible name if it only includes: alpha chars, spaces, dot
-    // Assuming name length must be at least 4 letters long
+    // Possible name if it only includes alpha chars, spaces, dot & is 4 chars or more
     isPossibleName(textString) {
         let onlyAplhaRegex = /^([a-z\s.]+)$/gi;
         return onlyAplhaRegex.test(textString) && textString.length > 3;
     }
 
     // Uses email to try and figure out which element in potentialNameArray has highest similarity 
-    // to the email parts <tok1>@<tok2>.com (Chosen as name since inputs are random and 
-    // no other way to be accurate with no structure) Highest similarity = most probable name
+    // to the email parts <tok1>@<tok2>.com. Highest similarity = most probable name
     findMostLikelyName(email, potentialNames) {
         let regex = /^([a-z\d-_.]+)@([a-z\d]+)/gi;  // Use to get email parts: <partOne>@<partTwo>.com
         let nameCanidate1;
