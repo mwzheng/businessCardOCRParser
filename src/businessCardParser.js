@@ -9,44 +9,38 @@ class BusinessCardParser {
     // Returns a contactInfo object made from inputText data
     getContactInfo(inputText) {
         let email, phoneNumber, name;
-        let foundPhoneNumb, foundEmail, foundName;
         let inputLines = inputText.split('\n');
         let potentialNames = [];
-        foundPhoneNumb = foundEmail = foundName = false;
 
         // Filter out address while trying to find email, phone number & potential names
         for (let aLine of inputLines) {
-            aLine = aLine.replace(/  +/g, '').trim(); // Remove extra spaces in the string
+            aLine = aLine.replace(/  +/g, '').trim(); // Remove extra spaces (two or more in a row, front and end)
 
-            if (!foundName && this.isPossibleName(aLine)) { // Found a possible name
+            if (this.isPossibleName(aLine)) { // Found a possible name
                 aLine = this.toTitleCase(aLine);
                 potentialNames.push(aLine);
-            } else if (!foundPhoneNumb && this.isValidPhoneNumber(aLine)) { // Found phone number
+            } else if (!phoneNumber && this.isValidPhoneNumber(aLine)) { // Found phone number
                 phoneNumber = this.sanitizePhoneString(aLine);
-                foundPhoneNumb = true;
-            } else if (!foundEmail && this.isValidEmail(aLine)) { // Found email address
-                email = aLine.replace(/ /g, "");
-                foundEmail = true;
+            } else if (!email && this.isValidEmail(aLine)) { // Found email address
+                email = this.removeAllSpaces(aLine);
             }
         }
 
-        if (!foundEmail && potentialNames.length > 0) { // No email was found so use first elem in potentialNames as the name
+        if (!email && potentialNames.length > 0) { // No email was found so use first elem in potentialNames as the name
             name = potentialNames[0];
-            foundName = true;
         } else if (potentialNames.length > 0) { // Use email to find the most likely name from potentialNames
             name = this.findMostLikelyName(email, potentialNames);
-            foundName = true;
         }
 
         // Return not found message for any unknown info
-        if (!foundName) name = 'Name was not found!';
-        if (!foundEmail) email = 'Email was not found!';
-        if (!foundPhoneNumb) phoneNumber = 'Phone number was not found!';
+        if (!name) name = 'Name was not found!';
+        if (!email) email = 'Email was not found!';
+        if (!phoneNumber) phoneNumber = 'Phone number was not found!';
 
         return new ContactInfo(name, phoneNumber, email);
     }
 
-    // Converts string to title case (the cat => The Cat)
+    // Converts string to title case (Ex: the cat in the hat => The Cat In The Hat)
     toTitleCase(string) {
         let stringToks = string.split(' ');
         return stringToks.map(tok => {
@@ -65,19 +59,17 @@ class BusinessCardParser {
     // to the email parts <tok1>@<tok2>.com (Chosen as name since inputs are random and 
     // no other way to be accurate with no structure) Highest similarity = most probable name
     findMostLikelyName(email, potentialNames) {
-        let regex = /^([a-z\d-_.]+)@([a-z\d]+)/gi
-        let emailTok, nameCanidate1;
-        const emailTokens = [...email.matchAll(regex)];
+        let regex = /^([a-z\d-_.]+)@([a-z\d]+)/gi;  // Use to get email parts: <partOne>@<partTwo>.com
+        let nameCanidate1;
+        const emailTokens = [...email.matchAll(regex)][0];
 
-        // Calculate similarity ratings & return highest one as potential name
-        emailTok = emailTokens[0][1];
-        nameCanidate1 = this.findMostSimilar(emailTok, potentialNames);
+        // Calculate similarity ratings & return highest one as nameCanidate1
+        nameCanidate1 = this.findMostSimilar(emailTokens[1], potentialNames);
 
-        // If tok1 has less than .2 similarity rating try tok2 and return the highest one as the name
+        // If emailTok has less than .2 similarity rating try tok2 and return the highest one as the name
         if (nameCanidate1.rating < .2) {
             let nameCanidate2;
-            emailTok = emailTokens[0][2];
-            nameCanidate2 = this.findMostSimilar(emailTok, potentialNames);
+            nameCanidate2 = this.findMostSimilar(emailTokens[2], potentialNames);
 
             if (nameCanidate2.rating > .2)
                 return nameCanidate2.target;
@@ -86,29 +78,36 @@ class BusinessCardParser {
         return nameCanidate1.target;
     }
 
-    // Returns element in array with the highest similarity;
+    // Returns element in potentialNames array with the highest similarity to the possibleName
+    // Element returned has target, rating
     findMostSimilar(possibleName, potentialNames) {
-        let matches = findBestMatch(possibleName, potentialNames);
-        let bestMatch = matches.bestMatchIndex;
-        return matches.ratings[bestMatch];
+        let results = findBestMatch(possibleName, potentialNames);
+        let bestMatch = results.bestMatchIndex;
+        return results.ratings[bestMatch];
     }
 
     // Returns true if not fax number & is valid phone number
-    isValidPhoneNumber(phoneString) {
-        let isFaxNumber = phoneString.toLowerCase().includes('f');
+    isValidPhoneNumber(input) {
+        let isFaxNumber = input.toLowerCase().includes('f');
         if (isFaxNumber) return false;
-        return this.phoneNumberRegex.test(phoneString.replace(/ /g, ''));
+        input = this.removeAllSpaces(input);
+        return this.phoneNumberRegex.test(input);
     }
 
-    // Removes all non-numeric chars
+    // Removes all non-digits from the phoneString
     sanitizePhoneString(phoneString) {
         return phoneString.replace(/[^\d]/g, '');
     }
 
     // Takes a string and remove all spaces before checking against email regex
     isValidEmail(input) {
-        input = input.replace(/ /g, "");
+        input = this.removeAllSpaces(input);
         return this.emailRegex.test(input);
+    }
+
+    // Removes all spaces from the string
+    removeAllSpaces(input) {
+        return input.replace(/ /g, '');
     }
 }
 
