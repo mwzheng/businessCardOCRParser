@@ -13,11 +13,30 @@ Test:
 Notes:
 - This was my first time ever writing test code using Jest
 
-- I wasn't able to figure out how to test the BuisnessCardParser's getContactInfo() using Jest since I was using an external library and I kept getting an error in jest. Therefore, I had to manually test it with different inputs in test/inputTestData.txt.
-
 - I used the parts of the email to make a best guess for the person's name since input was random and unstructured. If no email was provided I used the first possible candidate as the name.
 
 - One assumption I did make, however, was that each data was on it's own line (Ex: Name and address won't be on same line, etc.)
 
+<b>Files:</b>
+- <b>public:</b>
+    - <b>index.html:</b> Main page of the application
+
+- <b>src:</b>
+    - <b>index.js:</b> Retrieves input & passes it to BusinessCardParser & displays output
+
+    - <b>businessCardParser.js:</b> includes BusinessCardParser and all code used to extract info from input
+
+    - <b>contactInfo.js:</b> contans contactInfo object to store info extracted by BusinessCardParser
+
+    - <b>stringSimilarity.js:</b> All code from string-similarity library 
+
+- <b>test:</b>
+    - <b>businessCardParser.test.js:</b> All test for businessCardParser class
+
+    - <b>regex.test.js:</b> All test for phone & email regex used in businessCardParser
+
+    - <b>inputTestData.txt:</b> Contains input for every test for getContactInfo() to test manually
+
 Libraries used: 
+    
 - [String-Similarity](https://github.com/aceakash/string-similarity#for-browser-apps)
