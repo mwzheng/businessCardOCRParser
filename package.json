@@ -1,0 +1,22 @@
+{
+  "name": "businesscardocr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Mickey Zheng",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/preset-env": "^7.13.12",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^26.6.3"
+  },
+  "dependencies": {
+    "babel-jest": "^26.6.3",
+    "http-server": "^0.12.3",
+    "live-server": "^1.2.1"
+  }
+}

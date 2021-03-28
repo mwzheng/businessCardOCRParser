@@ -1,0 +1,92 @@
+------ Test input 1 ------ Sample input #1
+ASYMMETRIK LTD
+Mike Smith
+Senior Software Engineer
+(410)555-1234
+msmith@asymmetrik.com
+
+------ Test input 2 ------ Sample input #2
+Foobar Technologies
+Analytic Developer
+Lisa Haung
+1234 Sentry Road
+Columbia, MD 12345
+Phone: 410-555-1234
+Fax: 410-555-4321
+lisa.haung@foobartech.com
+
+------ Test input 3 ------ Sample input #3
+Arthur Wilson
+Software Engineer
+Decision & Security Technologies
+ABC Technologies
+123 North 11th Street
+Suite 229
+Arlington, VA 22209
+Tel: +1 (703) 555-1259
+Fax: +1 (703) 555-1200
+awilson@abctech.com
+
+------ Test input 4 ------ Different ordering/formats (Address first)
+252 NW. Southampton Street
+Wheeling, WV 26003
+p: 123-578-1301
+Peter Parker
+Photographer
+f: 111 111 1111
+spidey-boy@somepeter.com
+
+------ Test input 5 ------ Different ordering/formats (Email First)
+sellinghouses@tony.com
+Real Estate Agent
++1 102-126-1056
+20 N. Talbot Lane
+Nicholasville, KY 40356
+TONY N.
+
+------ Test input 6 ------ Missing email 
+Cody Copeland
+Office manager
+Hessel Group
+28 Acacia Court
+Beltsville, MD 20705
+856-441-6644
+
+------ Test input 7 ------ Missing phone number 
+7097 Hawthorne Lane
+Peabody, MA 01960
+Gaby's Salon
+Gaby O.
+Hairdresser
+gabonis718@gme.dwgtcm.com
+
+------ Test input 8 ------ Missing name, email & phone number (Output uses Farrell Llc as name)
+Farrell LLC
+982 Victoria Ave.
+Canal Winchester, OH 43110
+
+------ Test input 9 ------ Random spaces
+Reichel     and Sons
+99    Dogwood     Ave.
+Burlington   , MA     01803
+Re   ichel S.
+fax: 1    12 3 5665      322
+r-s amuels  @rei   chel.   com
+phone: 1 33 4444 1956
+
+------ Test input 10 ------ Random spaces
+Libra rian
+Car   rie Max well
+415    Beechwood Court
+Beckley, WV    25801
+607     304     7229
+c.m.well@something.org
+
+------ Test input 11 ------ Random spaces, wrong phone format
+Retired Surgeon
+Dr.    Carson 
+Hospital somewhere
+bcarson@something.com
+(1 (129 123 1223
+48 Rose St. 
+Johnson City, TN 37601

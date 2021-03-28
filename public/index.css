@@ -1,0 +1,69 @@
+body {
+    font-family: monospace;
+    background-color: #cae9ff;
+}
+
+*:focus {
+    outline: none;
+}
+
+button {
+    transition: ease-in-out .4s;
+    background-color: rgb(220, 237, 253);
+}
+
+button:hover {
+    background-color: rgb(201, 226, 250);
+    cursor: pointer;
+}
+
+p {
+    margin: 5px;
+}
+
+h2, h3 {
+    margin-bottom: 5px;
+}
+
+h2 {
+    font-size: 2vw;
+}
+
+h3 {
+    font-size: 1.5vw;
+}
+
+#formContainer, h2, h3 {
+    text-align: center;
+}
+
+#submitButton, #textArea, .aContact {
+    width: 30vw;
+    border-radius: 15px;
+    font-size: .85vw;
+}
+
+#textArea {
+    background-color: rgb(224, 239, 246);
+    height: 10vw;
+    padding: 10px;
+    margin: 5px 0px;
+    resize: none;
+}
+
+.aContact {
+    padding: 2px 5px;
+    width: 25vw;
+    margin: 10px auto;
+    border-style: double;
+    display: flex;
+}
+
+.icon{
+    margin: 3px 10px 0px 5px;
+    width: 4vw;
+}
+
+.notFound {
+    color: rgb(231, 85, 85)
+}
