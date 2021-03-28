@@ -58,6 +58,7 @@ Peabody, MA 01960
 Gaby's Salon
 Gaby O.
 Hairdresser
+fax: 103 120 1957
 gabonis718@gme.dwgtcm.com
 
 ------ Test input 8 ------ Missing name, email & phone number (Output uses Farrell Llc as name)
@@ -90,3 +91,20 @@ bcarson@something.com
 (1 (129 123 1223
 48 Rose St. 
 Johnson City, TN 37601
+
+------ Test input 12 ------ Similar Name & job title
+KENNEL ASSISTANT
+KENNEY GOU
+9 St Margarets Ave.
+Pataskala, OH 43062
+kenney@animalservice.com
+481-485-1135
+
+------ Test input 13 ------ Similar Name & job title
+Tim powers
+Tim Powel
+timP@usc.edu
+048   195-       1345
+0103119384
+225 Lexington Ave.
+Jersey City, NJ 07302

@@ -164,7 +164,8 @@ describe("Testing BuisnessCardParser getContactInfo method with various inputs",
     })
 
     test('Test input #7: Missing Phone Number', () => {
-        input = "7097 Hawthorne Lane\nPeabody, MA 01960\nGaby's Salon\nGaby O.\nHairdresser\ngabonis718@gme.dwgtcm.com";
+        input = "7097 Hawthorne Lane\nPeabody, MA 01960\nGaby's Salon\nGaby O.\nHairdresser\n" +
+            "fax: 103 120 1957\ngabonis718@gme.dwgtcm.com";
 
         contactInfo = parser.getContactInfo(input).toString();
         expectedOutput = 'Name: Gaby O.\nPhone: Phone number was not found!\nEmail: gabonis718@gme.dwgtcm.com';
@@ -198,7 +199,7 @@ describe("Testing BuisnessCardParser getContactInfo method with various inputs",
         expect(contactInfo).toBe(expectedOutput);
     })
 
-    test('Test input #11: ', () => {
+    test('Test input #11: Wrong phone format', () => {
         let parser = new BusinessCardParser();
         input = "Retired Surgeon\nDr.    Carson \nHospital somewhere\n" +
             "bcarson@something.com\n(1 (129 123 1223\n48 Rose St. \nJohnson City, TN 37601";
@@ -208,11 +209,22 @@ describe("Testing BuisnessCardParser getContactInfo method with various inputs",
         expect(contactInfo).toBe(expectedOutput);
     })
 
-    // test('Test input #: ', () => {
-    //     input = "";
+    test('Test input #12: Similar Name & job title', () => {
+        input = "KENNEL ASSISTANT\nKENNEY GOU\n9 St Margarets Ave.\n" +
+            "Pataskala, OH 43062\nkenney@     animalservice.  com\n481 485- 1135";
 
-    //     contactInfo = parser.getContactInfo(input).toString();
-    //     expectedOutput = 'Name: \nPhone: \nEmail: ';
-    //     expect(contactInfo).toBe(expectedOutput);
-    // })
+        contactInfo = parser.getContactInfo(input).toString();
+        expectedOutput = 'Name: Kenney Gou\nPhone: 4814851135\nEmail: kenney@animalservice.com';
+        expect(contactInfo).toBe(expectedOutput);
+    })
+
+    test('Test input #13: Similar Name & Company Name', () => {
+        let parser = new BusinessCardParser();
+        input = "Timber powers\nTim Powel\ntimP@usc.edu\n048   195-       1345\n" +
+            "0103119384\n225 Lexington Ave.\nJersey City, NJ 07302";
+
+        contactInfo = parser.getContactInfo(input).toString();
+        expectedOutput = 'Name: Tim Powel\nPhone: 0481951345\nEmail: timP@usc.edu';
+        expect(contactInfo).toBe(expectedOutput);
+    })
 })

@@ -14,25 +14,26 @@ class BusinessCardParser {
 
         // Filter out address while trying to find email, phone number & potential names
         for (let aLine of inputLines) {
-            aLine = aLine.replace(/  +/g, '').trim(); // Remove extra spaces (two or more in a row, front and end)
+            aLine = aLine.replace(/  +/g, '').trim();
 
-            if (this.isPossibleName(aLine)) { // Found a possible name
+            if (this.isPossibleName(aLine)) {
                 aLine = this.toTitleCase(aLine);
                 potentialNames.push(aLine);
-            } else if (!phoneNumber && this.isValidPhoneNumber(aLine)) { // Found phone number
+            } else if (!phoneNumber && this.isValidPhoneNumber(aLine)) {
                 phoneNumber = this.sanitizePhoneString(aLine);
-            } else if (!email && this.isValidEmail(aLine)) { // Found email address
+            } else if (!email && this.isValidEmail(aLine)) {
                 email = this.removeAllSpaces(aLine);
             }
         }
 
-        if (!email && potentialNames.length > 0) { // No email was found so use first elem in potentialNames as the name
-            name = potentialNames[0];
-        } else if (potentialNames.length > 0) { // Use email to find the most likely name from potentialNames
+        // Use email to find name, else use first element in potential names 
+        if (email && potentialNames.length > 0) {
             name = this.findMostLikelyName(email, potentialNames);
+        } else if (potentialNames.length > 0) {
+            name = potentialNames[0];
         }
 
-        // Return not found message for any unknown info
+        // Set not found message for any unknown info
         if (!name) name = 'Name was not found!';
         if (!email) email = 'Email was not found!';
         if (!phoneNumber) phoneNumber = 'Phone number was not found!';
@@ -86,7 +87,7 @@ class BusinessCardParser {
         return results.ratings[bestMatch];
     }
 
-    // Returns true if not fax number & is valid phone number
+    // Returns true if not fax number & is valid phone number format
     isValidPhoneNumber(input) {
         let isFaxNumber = input.toLowerCase().includes('f');
         if (isFaxNumber) return false;
