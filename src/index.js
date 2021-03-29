@@ -2,7 +2,7 @@ import BusinessCardParser from './businessCardParser.js';
 
 const textArea = document.getElementById('textArea');
 const submitButton = document.getElementById('submitButton');
-const contactContainer = document.getElementById('contactsContainer');
+const contactsContainer = document.getElementById('contactsContainer');
 
 // Process input for contact info and returns a contactInfo object
 function processData() {
@@ -25,21 +25,24 @@ function createNewContactBox(contactInfo) {
     phone = contactInfo.getPhoneNumber();
     email = contactInfo.getEmailAddress();
 
-    newBox = "<div class='aContact'>" +
-        "<div class='contactIcon'><img class='icon' src='./contactIcon.png' alt='contactIcon'></div>" +
+    newBox =
+        "<div class='aContact'>" +
+        "<div class='contactIcon'>" +
+        "<img class='icon' src='./contactIcon.png' alt='contactIcon'>" +
+        "</div>" +
         "<div class='info'>";
 
-    newBox += makeContactPortion("Name", "name", name);
-    newBox += makeContactPortion("Phone", "phoneNumber", phone);
-    newBox += makeContactPortion("Email", "email", email);
+    newBox += makeContactRow("Name", "name", name);
+    newBox += makeContactRow("Phone", "phoneNumber", phone);
+    newBox += makeContactRow("Email", "email", email);
     newBox += "</div></div>";
 
-    contactContainer.innerHTML += newBox;
+    contactsContainer.innerHTML += newBox;
 }
 
 // Makes a single part of the contactBox (Name, Phone or email)
 // If field is not found, then give class name not found to make it red
-function makeContactPortion(field, id, input) {
+function makeContactRow(field, id, input) {
     let className = input.includes('not found') ? 'notFound' : 'found';
     return `<p><b><u>${field}</u>:</b> <span id=${id} class=${className}>${input}</span></p>`;
 }
