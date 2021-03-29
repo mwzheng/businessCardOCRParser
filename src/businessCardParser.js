@@ -4,7 +4,7 @@ import { findBestMatch } from './stringSimilarity.js';
 // Class contains the logic to extract necessary contact info from input 
 class BusinessCardParser {
     phoneNumberRegex = /[+]?\d?.?\(?\d{3}\)?.?\d{3}.?\d{4}/g;
-    emailRegex = /^[a-z\d]+.?[a-z\d]+.?[a-z\d]+@[a-z]+[.-]?[a-z]*\.[a-z]+$/gi;
+    emailRegex = /^([a-z\d]+.?){0,3}[a-z\d]+@[a-z]+[.-]?[a-z]*\.[a-z]+$/gi;
 
     // Returns a contactInfo object made from inputText data
     getContactInfo(inputText) {

@@ -71,7 +71,7 @@ describe("Testing phoneNumberRegex", () => {
 })
 
 describe('Testing emailRegex', () => {
-    const emailRegex = /^[a-z\d]+.?[a-z\d]+.?[a-z\d]+@[a-z]+[.-]?[a-z]*\.[a-z]+$/gi;
+    const emailRegex = /^([a-z\d]+.?){0,3}[a-z\d]+@[a-z]+[.-]?[a-z]*\.[a-z]+$/gi;
     let email;
 
     describe('Testing email regex against different potential emails', () => {
