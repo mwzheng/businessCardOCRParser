@@ -24,11 +24,11 @@ Notes:
 - <b>src:</b>
     - <b>index.js:</b> Retrieves input & passes it to BusinessCardParser & displays output
 
-    - <b>businessCardParser.js:</b> includes BusinessCardParser and all code used to extract info from input
+    - <b>businessCardParser.js:</b> All logic used to extract info from input
 
-    - <b>contactInfo.js:</b> contans contactInfo object to store info extracted by BusinessCardParser
+    - <b>contactInfo.js:</b> Contans contactInfo class to store info extracted by BusinessCardParser
 
-    - <b>stringSimilarity.js:</b> All code from string-similarity library 
+    - <b>stringSimilarity.js:</b> All code from string-similarity library (NOT MY CODE)
 
 - <b>test:</b>
     - <b>businessCardParser.test.js:</b> All test for businessCardParser class

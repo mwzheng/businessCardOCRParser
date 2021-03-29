@@ -1,7 +1,7 @@
 export { findBestMatch };
 
 // NOTE: All code below is from String-Similarity library (https://github.com/aceakash/string-similarity)
-// Used to calculate a numerical value for string similarities (1 = exact, 0 = not similar at all)
+// Used to calculate a numerical value for string similarities (1 = exact, 0 = completely different)
 
 function compareTwoStrings(first, second) {
     first = first.replace(/\s+/g, '')
