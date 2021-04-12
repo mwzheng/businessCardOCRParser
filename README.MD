@@ -1,5 +1,11 @@
 ## Business Card OCR Parser
 
+This was my submission for the programming challenge by Asymmetrik. Below is the original description.
+
+"We’ve created a new smartphone app that enables users to snap a photo of a business card and have the information from the card automatically extracted and added to their contact list. We need you to write the component that parses the results of the optical character recognition (OCR) component in order to extract the name, phone number, and email address from the processed business card image.
+
+For the challenge, we need you to build a command line tool or graphical user interface that takes the business card text as input and outputs the Name, Phone, and Email Address of the owner of the business card." 
+
 To run:
 - $ npm install -g live-server
 - $ npm install
